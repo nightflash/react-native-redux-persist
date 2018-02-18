@@ -4,7 +4,7 @@ const createFilterKeys = config => key => {
   if (config.whitelist) {
     return config.whitelist.indexOf(key) !== -1;
   } else if (config.blacklist) {
-    return config.whitelist.indexOf(key) === -1;
+    return config.blacklist.indexOf(key) === -1;
   }
 
   return true;
