@@ -12,6 +12,9 @@ const createFilterKeys = config => key => {
 
 const TAG = 'Persist:';
 
+export const EVENT_RESTORE = 'restore';
+export const EVENT_SAVE = 'save';
+
 class Persist {
   static STATE = {
     INIT: 0,
@@ -63,6 +66,17 @@ class Persist {
 
   isRestored() {
     return this._restored;
+  }
+
+  onRestore(fn) {
+    if (this._restored) {
+      fn();
+    } else {
+      this.addEventListener(EVENT_RESTORE, () => {
+        fn();
+        this.removeEventListener(EVENT_RESTORE, fn);
+      });
+    }
   }
 
   _log(...args) {
@@ -123,7 +137,7 @@ class Persist {
     if (dataToSave.length) {
       try {
         await AsyncStorage.multiSet(dataToSave).then(() => {
-          this._callEvent('save', payload);
+          this._callEvent(EVENT_SAVE, payload);
         });
       } catch (e) {
         logger.error(e);
@@ -168,7 +182,7 @@ class Persist {
             ...notStored
           }
         });
-        this._callEvent('restore', {
+        this._callEvent(EVENT_RESTORE, {
           ...stored,
           ...notStored
         });
