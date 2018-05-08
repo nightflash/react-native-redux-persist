@@ -80,7 +80,11 @@ class Persist {
   }
 
   _log(...args) {
-    this.config.log && console.log(...args);
+    const {log} = this.config;
+
+    if (log) {
+      typeof log === 'function' ? log(...args) : console.log(...args);
+    }
   }
 
   _callEvent(eventName, ...args) {
