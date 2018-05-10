@@ -1,11 +1,15 @@
 {
   "name": "react-native-redux-persist",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Max Erekhinskiy <max.erekhinskiy@gmail.com>",
+  "repository" :{
+    "type" : "git",
+    "url" : "https://github.com/nightflash/react-native-redux-persist"
+  },
   "license": "ISC"
 }

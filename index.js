@@ -186,12 +186,14 @@ class Persist {
             ...notStored
           }
         });
+
+        this.state = Persist.STATE.READY;
+        this._restored = true;
+
         this._callEvent(EVENT_RESTORE, {
           ...stored,
           ...notStored
         });
-        this.state = Persist.STATE.READY;
-        this._restored = true;
       });
     } catch(e) {
       logger.error(e);
